@@ -1,4 +1,4 @@
-"""Copyright 2016 from coding with python book and things and alot more things"""
+"""Copyright 2016"""
 import pygame
 import game_functions as gf
 
@@ -8,6 +8,7 @@ from alien import Alien
 from pygame.sprite import Group
 from game_stats import GameStats
 from button import Button
+from scoreboard import Scoreboard   
 
 def run_game():
     #intialize pygame, settings, and create a screen object.
@@ -26,9 +27,10 @@ def run_game():
     
     # Create a fleet of aliens.
     gf.create_fleet(ai_settings, screen, ship, aliens)
-    
-    # Create an instance to store game statistics.
+
+    # Creatr  an instance  to store game statistics and create a scoreboard.
     stats = GameStats(ai_settings)
+    sb = Scoreboard(ai_settings, screen, stats) 
     
     # Start the main loop for the game.
     while True:
@@ -39,13 +41,13 @@ def run_game():
             # Update the ship based on movement flag.
             ship.update()
             # Update the bullets based on movement flag and remove bullets.        
-            gf.update_bullets(ai_settings, screen, ship, aliens, bullets)
+            gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
             # To see the number of bullets return to 0 after shooting.
             #print(len(bullets)) 
             # Update aliens to move.
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
             # Redraw the screen during each pass through the loop. 
-        gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button)
+        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button)
             
             
         
