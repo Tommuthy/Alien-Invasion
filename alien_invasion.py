@@ -1,4 +1,4 @@
-"""Copyright 2016"""
+"""Copyright 2016 from coding with python book and things and alot more things"""
 import pygame
 import game_functions as gf
 
